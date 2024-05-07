@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+            
+<main class="no-margin">
+
+    <section class="container">
+
+        <!-- POST DETAIL ITEM START -->
+        <div class="form-divider"></div>
+      
+        <!-- POST DETAIL ITEM END -->
+
+
+
+        <!-- POST DETAIL CONTENT START -->
+        <div class="post-detail">
+            <h3>Python тілі бойынша тест тапсыру </h3>
+            <form id="test-form">
+            {% csrf_token %}
+            {% for question in questions %}
+              <h3>{{ question.text }}</h3>
+              {% for choice in question.choice_set.all %}
+                <label class="d-block">
+                  <input type="radio" class="" name="{{ question.id }}" value="{{ choice.id }}">
+                  {{ choice.text }}
+                </label>
+              {% endfor %}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary btn-sm w-100" style="margin-top: 15px;">Жауаптарды жіберу</button>
+          </form>
+          <div id="results" style="margin-top: 15px;font-weight: 500;"></div>
+        </div>
+        <!-- POST DETAIL CONTENT END -->
+
+        <script type="text/javascript">
+            $(function() {
+              $('#test-form').on('submit', function(event) {
+                event.preventDefault();
+                $.ajax({
+                  url: '{% url "universystem:submit_answers" %}',
+                  type: 'POST',
+                  data: $(this).serialize(),
+                  success: function(response) {
+                    $('#results').text('Сіз дұрыс жауап бердіңіз ' + response.score + ' сұрақ(қа).' + response.total + ' сұрақтың ішінен.');
+                  },
+                  error: function() {
+                    alert('Произошла ошибка при отправке ответов');
+                  }
+                });
+              });
+            });
+        </script>
+        <div class="form-divider"></div>
+
+    </section>
+</main>
+
+{% endblock %}  

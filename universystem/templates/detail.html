@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="no-margin">
+
+    <section class="container">
+
+        <!-- POST DETAIL ITEM START -->
+        <div class="form-divider"></div>
+      
+        <!-- POST DETAIL ITEM END -->
+
+
+
+        <!-- POST DETAIL CONTENT START -->
+        <div class="post-detail">
+            <h3>{{ lecturesone.name }} </h3>
+            {% for lectures_texts in lectures_text %}
+                <h4 class="" style="font-size: 18px; margin-top: 15px;">{{ lectures_texts.title }}</h4>
+                <p  style="padding: 0px 1px;color: inherit;white-space: pre-line;margin-top: -31px;">
+                 {{ lectures_texts.text }}
+                </p>
+                <p class="">
+               {% if lectures_texts.photo %}
+                 <img src=" {{ lectures_texts.photo.url }}" alt="" style="width: 90%;margin: 0 auto;text-align: center;height: auto;">
+               {% endif %}
+                </p>
+                {% if lectures_texts.lectures_cod %}
+                <div style="padding: 10px 20px; margin-bottom: 15px; font-size: 12px;color: inherit;white-space: pre-wrap;background-color: #f9f2f4;border-radius: 0;">{{ lectures_texts.lectures_cod }}</div>
+                {% endif %}
+            {% endfor %}
+            <form action="{% url 'universystem:AddEnrlcourseView' lecturesone.id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{ lecturesone.id }}" name="lessonid">
+                <button type="submit" class="button circle block blue" style="border-radius: 0;margin-top: 7px;margin-bottom: 7px;">Тақырыппен таныстым</button>
+            </form>
+            <div class="form-divider"></div>
+            <div class="form-label-divider"><span>Компилятор Python</span></div>
+            <div class="form-divider"></div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-row no-padding">
+                    <label for="codearea" class="form-label" style="color: #333;">Код</label>
+                    <textarea type="text" style="display: block;width: 100%;border: solid 3px #EEE;height: 150px;outline: none;line-height: 40px;background-color: #FFF" id="codearea" name="codearea" rows="10" onkeydown="if(event.keyCode===9){var v=this.value, s=this.selectionStart, e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"></textarea>
+                </div>
+                <div class="form-row no-padding">
+                    <label for="codearea" class="form-label" style="color: #333;">Қорытынды</label>
+                    <textarea type="text" class="form-control"style="display: block;width: 100%;border: solid 3px #EEE;height: 150px;outline: none;line-height: 40px;background-color: #FFF" id="output" name="output" rows="5" disabled>{{output}}</textarea>
+                    <br>
+                    <button type="submit" class="button circle block orange">Шешу</button>
+                </div>
+            </form>
+        </div>
+        <!-- POST DETAIL CONTENT END -->
+
+
+        <div class="form-divider"></div>
+
+    </section>
+</main>
+{% endblock %}  

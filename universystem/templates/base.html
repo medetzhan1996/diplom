@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>Python оқулықтары </title>
+
+    <!-- Google font file. If you want you can change. -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,900" rel="stylesheet">
+ -->
+    <!-- Fontawesome font file css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'new/css/font-awesome.min.css' %}">
+
+    <!-- Swiper slider css file -->
+    <link rel="stylesheet" href="{% static 'new/css/swiper.min.css' %}">
+
+    <!-- Template global css file. Requared all pages -->
+    <link rel="stylesheet" type="text/css" href="{% static 'new/css/global.style.css' %}">
+    <script src="{% static 'new/js/jquery-3.2.1.min.js' %}"></script>
+</head>
+<style type="text/css">
+ .alert {
+    margin-top: 70px;
+    color: red;
+    font-size: 26px;
+    padding: 0;
+ }   
+</style>
+<body>
+    
+    <div class="wrapper">
+        <div class="nav-menu">
+            <nav class="menu">
+                <!-- Template logo start -->
+                <div class="nav-header">
+                    <a href="#">
+                        <span>{{ request.user }}</span>
+                        <span>{{ request.user.email }}</span>
+                    </a>
+                </div>
+                <!-- Template logo end -->
+                <!-- Menu navigation start -->
+                <div class="nav-container">
+                    <ul class="main-menu">
+                        
+                        <li class="active">
+                            <a href="{% url 'universystem:StudentProfileIndexView' %}"><img src="{% static 'new/img/icons/i1.png' %}" alt=""> Басты бет</a>
+                        </li>
+                       
+                        <li>
+                            <a href="product-detail.html#"><img src="{% static 'new/img/icons/i1.png' %}" alt=""> Python оқулықтары <span class="fa fa-angle-down"></span></a>
+                            <ul>
+                                {% for les in lectures %}
+                                 <li class="">
+                                    <a href="{% url 'universystem:LessonsDetailView' id=les.id %}" data-loader="show">{{les.name}}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="product-detail.html#"><img src="{% static 'new/img/icons/i1.png' %}" alt=""> Python бейне сабақтары <span class="fa fa-angle-down"></span></a>
+                            <ul>
+                                {% for item in video %}
+                                 <li class="">
+                                    <a href="{% url 'universystem:VideoDetailView' id=item.id %}" data-loader="show">{{item.title}}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                         <li>
+                            <a href="{% url 'universystem:test' %}"><img src="{% static 'new/img/icons/i1.png' %}" alt="">  Тест тапсыру</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'universystem:ProfileView' %}"><img src="{% static 'new/img/icons/i1.png' %}" alt="">  Профиль</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'universystem:AboutView' %}"><img src="{% static 'new/img/icons/i1.png' %}" alt="">  Біз жайлы</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'universystem:ApplicationView' %}"><img src="{% static 'new/img/icons/i1.png' %}" alt="">  Техникалық көмек</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'universystem:login' %}"><img src="{% static 'new/img/icons/i1.png' %}" alt="">  Шығу</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Menu navigation end -->
+            </nav>
+
+        </div>
+        <div class="wrapper-inline">
+            <!-- Header area start -->
+            <header> <!-- extra class no-background -->
+                <a class="go-back-link" href="javascript:history.back();"><i class="fa fa-arrow-left"></i></a>
+                <h2 class="page-title">Python оқулықтары </h2>
+                <div class="navi-menu-button">
+                    <em></em>
+                    <em></em>
+                    <em></em>
+                </div>
+            </header>
+            <!-- Header area end -->
+            {% if messages %}
+
+              {% for message in messages %}
+                  <div class="alert alert-warning d-flex justify-content-center" role="alert" style="margin-top: 50px;padding: 25px;">
+                      {{ message }} 
+                  </div>
+              {% endfor %}
+
+            {% endif %}
+            <!-- Page content start -->
+            {% block content %}
+        
+             {% endblock %} 
+            
+            <!-- Page content end -->
+        </div>
+    </div>
+
+
+
+    <!--Page loader DOM Elements. Requared all pages-->
+    <div class="sweet-loader">
+        <div class="box">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+        </div>
+    </div>
+
+    <!-- JQuery library file. requared all pages -->
+    
+
+    <!-- Template global script file. requared all pages -->
+    <script src="{% static 'new/js/global.script.js' %}"></script>
+
+    <!-- Swiper JS -->
+    <script src="{% static 'new/js/swiper.min.js' %}"></script>
+
+    <!-- Initialize Swiper -->
+ 
+    <script src="{% static 'new/js/swiper-ini.js' %}"></script>
+
+
+</body>
+
+</html>

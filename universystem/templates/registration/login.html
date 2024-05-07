@@ -1,0 +1,42 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+            
+    <div class="container enterance">
+        <div class="text-center">
+            <img src="{% static 'new/img/logo.png' %}" class="logo-img" alt="">
+            <h4 style="color: #fff; font-size: 18px">Python оқулықтары</h4>
+        </div>
+
+        <div class="form-divider"></div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-row-group with-icons">
+                <div class="form-row no-padding">
+                    <i class="fa fa-user"></i>
+                    <input type="text"  name="{{form.username.name}}"class="form-element" placeholder="Логин">
+                </div>
+                <div class="form-row no-padding">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" name="{{form.password.name}}" class="form-element" placeholder="Құпия сөз">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <input type="hidden" name="next" value="{{ next }}">
+                <input type="submit"  class="get-started-btn" value="Жүйеге кіру" style="border: 1px solid #00b894;width: 100%;}">
+            </div>
+         </form>
+        <div class="form-row txt-center w-text">
+            Егер сіз электронды оқулықта тіркелмеген болсаңыз <a href="{% url 'universystem:user_registration_page' %}" data-loader="show">Тіркелу</a>
+        </div>
+
+        <div class="form-divider"></div>
+
+    </div>
+</main>
+
+
+{% endblock %}

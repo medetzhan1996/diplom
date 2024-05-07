@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main>
+	<div class="container">
+		<div class="profile-bg">
+			<div class="form-divider"></div>
+			<div class="form-row txt-center">
+				<div class="profile-image">
+					<img class="avatar-img" alt="User Avatar" src="{% static 'img/avatar7.png' %}" width="100" height="100">
+					<a href="javascript:void(0);" class="update-btn"><i class="fa fa-camera"></i></a>
+				</div>
+			</div>
+			<div class="container">
+				<div class="student-name">
+					<h3>{{ request.user.username }} {{ request.user.first_name }}</h3>
+					<p>{{ request.user.email }}</p>
+				</div>
+			</div>
+		</div>
+		<section class="container">
+        	<div class="section-head">
+                <h4 class="title-main">Тест жауаптары</h4>
+            </div>
+
+            <div>
+                <ul class="courses-list list-unstyled mb-0">
+                	{% for test_result in test_results %}
+                    <li>
+                        <a href="" class="d-flex align-items-center">
+                            <div class="d-flex align-items-center course-item">
+                                <div class="ml-10 wd-100">
+                                	<h4 style="padding:0; margin: 0;">{{ test_result.created}}</h4>
+                                  	<p style="padding:0; margin: 0; font-size: 12px;    color: blueviolet;">Тест нәтижесі:{{ test_result.score }} -ден  {{ test_result.total }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            	
+
+            </div>
+
+        </section>
+		<section class="container">
+        	<div class="section-head">
+                <h4 class="title-main">Өткен сабақтардың тізімі</h4>
+            </div>
+
+            <div>
+                <ul class="courses-list list-unstyled mb-0">
+                	{% for les in lesson %}
+                    <li>
+                        <a href="" class="d-flex align-items-center">
+                            <div class="d-flex align-items-center course-item">
+                                <div class="ml-10 wd-100">
+                                  <h4 class="courses-name">{{les.lectures.name}}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            	
+
+            </div>
+
+        </section>
+
+	</div>
+</main>
+{% endblock %}  

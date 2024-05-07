@@ -1,0 +1,58 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .bootstrap-select .btn{
+        display: none;
+    }
+</style>
+<main>
+            
+    <div class="container enterance">
+        <div class="text-center">
+            <img src="{% static 'new/img/logo.png' %}" class="logo-img" alt="">
+            <h4 style="color: #fff; font-size: 18px">Python оқулықтары</h4>
+        </div>
+
+        <div class="form-divider"></div>
+        <form action="" method="POST" class="login100-form validate-form" enctype="multipart/form-data">
+
+                                    {% csrf_token %}
+                                    {% load widget_tweaks%}
+                                    <div class="form-group">
+                                        <label><strong>Логин:</strong></label>
+                                        {{ registration_form.username|add_class:"form-element" }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>Құпия сөз: </strong></label>
+                                        {{ registration_form.password|add_class:"form-element" }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>Құпия сөзді қайталаңыз: </strong></label>
+                                        {{ registration_form.password2|add_class:"form-element" }}
+                                    </div>
+                                   <div class="form-group">
+                                        <label><strong>Толық аты - жөніңіз:</strong></label>
+                                        {{ registration_form.first_name|add_class:"form-element" }}
+                                    </div>
+                                    <div class="form-group" >
+                                        <label><strong>Эл. адрес:</strong></label>
+                                        {{ registration_form.email|add_class:"form-element" }}
+                                    </div>
+                                    <br>
+                                    <div class="text-center mt-3">
+                                        <input type="submit"   class="get-started-btn" value="Жүйеге тіркелу" style="border: 1px solid #00b894;width: 100%;">
+                                    </div>
+                                </form>
+                                <div class="new-account mt-3">
+                                    <p> <a class="text-primary" href="{% url 'universystem:login' %}">Егер сізде логин болса</a></p>
+                                </div>
+
+        <div class="form-divider"></div>
+
+    </div>
+</main>
+
+{% endblock %}
